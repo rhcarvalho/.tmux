@@ -51,7 +51,7 @@ tmux_conf_theme_window_bg='default'
 # highlight focused pane (tmux >= 2.1), possible values are:
 #   - true
 #   - false (default)
-tmux_conf_theme_highlight_focused_pane=false
+tmux_conf_theme_highlight_focused_pane=true
 
 # focused pane colours:
 tmux_conf_theme_focused_pane_fg='default'
@@ -276,19 +276,39 @@ tmux_conf_copy_to_os_clipboard=false
 #set -g history-limit 10000
 
 # start with mouse mode enabled
-#set -g mouse on
+set -g mouse on
 
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
 #set -g status-keys vi
 #set -g mode-keys vi
 
-# replace C-b by C-a instead of using both prefixes
-# set -gu prefix2
-# unbind C-a
-# unbind C-b
-# set -g prefix C-a
-# bind C-a send-prefix
+# disable C-a as alternative prefix
+set -gu prefix2
+unbind C-a
 
 # move status line to top
 #set -g status-position top
+
+# keep terminal title simple
+set -g set-titles off
+
+# even longer pane indicators display time
+set -g display-panes-time 1500
+
+# ensure window names stick to what I set
+setw -g automatic-rename off
+setw -g allow-rename off
+
+# keep pane history when clearing the screen
+unbind -n C-l
+
+# notify shell activity visually and bell
+set -g visual-activity both
+
+
+# -- plugins -------------------------------------------------------------------
+
+run-shell ~/.tmux-plugins/tmux-resurrect/resurrect.tmux
+set -g @resurrect-dir '~/.tmux-resurrect'
+set -g @resurrect-capture-pane-contents 'on'
