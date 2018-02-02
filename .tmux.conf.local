@@ -306,6 +306,9 @@ unbind -n C-l
 # notify shell activity visually and bell
 set -g visual-activity both
 
+# copy to clipboard
+bind C run 'tmux show-buffer | pbcopy && tmux display "buffer copied to system clipboard"'
+
 
 # -- plugins -------------------------------------------------------------------
 
