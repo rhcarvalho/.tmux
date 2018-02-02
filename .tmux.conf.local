@@ -311,6 +311,9 @@ set -g visual-activity both
 # simple status bar
 set -g status-right " %a %b %d %H:%M"
 
+# copy to clipboard
+bind C run 'tmux show-buffer | pbcopy && tmux display "buffer copied to system clipboard"'
+
 
 # -- plugins -------------------------------------------------------------------
 
